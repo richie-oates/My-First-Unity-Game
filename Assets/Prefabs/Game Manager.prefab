@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6709023431745865820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6709023431745865810}
+  - component: {fileID: 6709023431745865821}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6709023431745865810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6709023431745865820}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -3.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6709023431745865821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6709023431745865820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7502ba75153004666a3e75497899d290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 7
+  horizontalDirection: 1
+  forwardMovement: 0.1
+  horizontalLimit: 11
+  enemyPrefabs:
+  - {fileID: 4985372300940728884, guid: cc32c44df7e3100eba355b00a82a178b, type: 3}
+  - {fileID: 1694633314377960488, guid: 172eb24ee846544929a1e932880929a7, type: 3}
+  - {fileID: 5704167124176767665, guid: 85500a7f58775fc61a3ae89c431a122d, type: 3}
+  - {fileID: 3862955033676797532, guid: 625101915892f5bd984ae7c25ed8aac1, type: 3}
+  - {fileID: 3069987283523748213, guid: 1809429978a13e780a4ae430c4587288, type: 3}
+  - {fileID: 6345597777793251135, guid: 70ae5f8cf57650c6d9d542b0f3754e98, type: 3}
+  enemyObjectsArray: []
+  enemyCowPrefab: {fileID: 463335933372323002, guid: 2874b846259b5b4cf8a4998e3a557e1d, type: 3}
+  enemyCowsArray: []
+  enemiesInRow: 8
+  enemyWave: 1
+  scoreText: {fileID: 0}
+  score: 0
+  hiScoreText: {fileID: 0}
+  hiScore: 0
