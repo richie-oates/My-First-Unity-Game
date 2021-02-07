@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 1694633314377960495}
   - component: {fileID: 1694633314377960499}
   - component: {fileID: 2822844755695429851}
-  - component: {fileID: 4977056824257445876}
+  - component: {fileID: -1548959531542163614}
+  - component: {fileID: -6657346681103501083}
   m_Layer: 10
   m_Name: Enemy2
   m_TagString: Enemy
@@ -94,7 +95,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694633314377960488}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -131,7 +132,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &4977056824257445876
+--- !u!114 &-1548959531542163614
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,13 +141,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 1694633314377960488}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b525978225100bf2adcc24461d176a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 37e3b226b5a756fd5a97acae9b6d49e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionParticles: {fileID: 2088871590894813759, guid: 745208c9d6e104225bd99e1ab894e3bb,
+  maxHealth: 1
+  explosionOffset: {x: 0, y: 1, z: 0.5}
+  explosionParticles: {fileID: 2478549635105912040, guid: ec46c8c4a3cbc429382ee48bd9169b45,
     type: 3}
+  explosionSound: {fileID: 8300000, guid: 2a921313c927f45238a0b8baabe3ab12, type: 3}
   pointsValue: 100
-  explosionSound: {fileID: 8300000, guid: eb8998f3b3d3a49db96a634bf39ed153, type: 3}
+  currentHealth: 0
+--- !u!114 &-6657346681103501083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694633314377960488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230e009fe1a6ba1b3badc7785af20f55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zLimitUpper: 50
+  zLimitLower: -15
+  xLimitUpper: 15
+  xLimitLower: -15
 --- !u!1001 &8972160149177356096
 PrefabInstance:
   m_ObjectHideFlags: 0

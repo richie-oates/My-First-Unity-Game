@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 5704167124176767664}
   - component: {fileID: 5704167124176767668}
   - component: {fileID: 5378598556817187079}
-  - component: {fileID: -3929363875639847980}
+  - component: {fileID: -3838211321178437238}
+  - component: {fileID: -7060142085940424335}
   m_Layer: 10
   m_Name: Enemy3
   m_TagString: Enemy
@@ -93,7 +94,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5704167124176767665}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -130,7 +131,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &-3929363875639847980
+--- !u!114 &-3838211321178437238
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,10 +140,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 5704167124176767665}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b525978225100bf2adcc24461d176a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 37e3b226b5a756fd5a97acae9b6d49e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionParticles: {fileID: 7535607469619513247, guid: ac10190cf200c4f7e881ca8e41d3d760,
+  maxHealth: 1
+  explosionOffset: {x: 0, y: 1, z: 0.5}
+  explosionParticles: {fileID: 2478549635105912040, guid: ec46c8c4a3cbc429382ee48bd9169b45,
     type: 3}
+  explosionSound: {fileID: 8300000, guid: 2a921313c927f45238a0b8baabe3ab12, type: 3}
   pointsValue: 100
-  explosionSound: {fileID: 8300000, guid: eb8998f3b3d3a49db96a634bf39ed153, type: 3}
+  currentHealth: 0
+--- !u!114 &-7060142085940424335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704167124176767665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230e009fe1a6ba1b3badc7785af20f55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zLimitUpper: 50
+  zLimitLower: -15
+  xLimitUpper: 15
+  xLimitLower: -15
