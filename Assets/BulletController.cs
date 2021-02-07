@@ -5,22 +5,12 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     public float speed = 25;
+    public Vector3 direction;
 
     // FixedUpdate is called once per frame
     void FixedUpdate()
     {
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
+        transform.Translate(direction * speed * Time.deltaTime);
     }
-
-    // private void Update() 
-    // {
-    //     if (transform.position.z > 18)
-    //     {
-    //         // Destroy(gameObject);
-
-    //         // Just deactivate it
-    //         gameObject.SetActive(false);
-    //     }
-    // }
     
 }

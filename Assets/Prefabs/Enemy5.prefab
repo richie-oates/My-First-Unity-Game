@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3069987283523748216}
   - component: {fileID: -1235212081923251741}
   - component: {fileID: -694515779618780178}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy5
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -111,10 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xLimit: 15
-  verticalMovement: 0.1
   enemyManagerObject: {fileID: 0}
-  explosionParticles: {fileID: 15085447402717889, guid: 743ce290c74ae49c19aa3f128322fc7e,
-    type: 3}
   pointsValue: 10
   zLimit: -15
 --- !u!54 &-1235212081923251741

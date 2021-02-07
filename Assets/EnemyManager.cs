@@ -21,12 +21,17 @@ public class EnemyManager : MonoBehaviour
     public GameObject enemyCowPrefab;
     // Array to count the number of enemy cows on the screen
     public GameObject[] enemyCowsArray;
+    [SerializeField] GameObject bullet;
     
     private bool cowSpawning = false;
     private bool enemyWaveSpawning = false;
     
     public int timeBetweenWaves = 2;
-    
+    [SerializeField] float timeBetweenShotsMin = 0.1f;
+    [SerializeField] float timeBetweenShotsMax = 0.5f;
+    private bool shooting = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +58,12 @@ public class EnemyManager : MonoBehaviour
             StartCoroutine(SpawnEnemies());
             enemyWaveSpawning = true;
         }
+
+        if (!enemyWaveSpawning && !shooting)
+        {
+            StartCoroutine(RandomShooting());
+            shooting = true;
+        }
         
         // Check if there are any instances of the enemyCow still alive
         // If not, start a timer then spawn a new one
@@ -64,6 +75,19 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    IEnumerator RandomShooting()
+    {
+        // Random time between shots
+        float timeBetweenShots = Random.Range(timeBetweenShotsMin, timeBetweenShotsMax);
+        // Wait before shooting
+        yield return new WaitForSeconds(timeBetweenShots);
+        // Get random enemy
+        GameObject enemyShooter = RandomEnemyGenerator();
+        // Shoot bullet instantiate at enemy postion
+        ShootBullet(enemyShooter.transform.position);
+
+        shooting = false;
+    }
     IEnumerator SpawnCowRoutine()
     {
         yield return new WaitForSeconds(5);
@@ -131,5 +155,20 @@ public class EnemyManager : MonoBehaviour
     public void SpawnCow()
     {
         Instantiate(enemyCowPrefab);
+    }
+
+    void ShootBullet(Vector3 position)
+    {
+        // creates an instance of the bullet
+        Instantiate(bullet, position, bullet.transform.rotation);
+        bullet.layer = 10;
+        bullet.GetComponent<BulletController>().direction = Vector3.down;
+    }
+
+    GameObject RandomEnemyGenerator()
+    {
+        int enemyNumber = Random.Range(0, enemyObjectsArray.Length-1);
+        GameObject enemy = enemyObjectsArray[enemyNumber];
+        return enemy;
     }
 }

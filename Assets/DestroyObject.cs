@@ -44,12 +44,14 @@ public class DestroyObject : MonoBehaviour
             if (pointsValue != 0)
             {
                 gameManager.ScoreChange(pointsValue);
+                Destroy(gameObject);
             } 
             else if (gameObject.CompareTag("Player"))
             {
                 gameManager.GameOver();
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
+            
         }
     }
 

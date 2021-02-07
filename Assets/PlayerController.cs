@@ -76,7 +76,9 @@ public class PlayerController : MonoBehaviour
     {
         // creates an instance of the bullet
         Instantiate(bullet, transform.position + new Vector3(0, 0, 1.5f), bullet.transform.rotation);
-
+        BulletController bulletController = bullet.GetComponent<BulletController>();
+        bulletController.direction = Vector3.up;
+        bullet.layer = 9;
 
         // Todo: This now links the roatation of bullet to the player so it turns when the player does,
         // that's not what we want!!
