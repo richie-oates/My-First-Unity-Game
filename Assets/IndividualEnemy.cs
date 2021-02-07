@@ -9,8 +9,7 @@ public class IndividualEnemy : MonoBehaviour
     EnemyManager enemyManager;
     public int pointsValue;
     public float zLimit = -8.0f;
-    bool moveRight = true;
-    bool moveVertically = false;
+
 
     // Awake is called when the gameobject is created
     void Awake()

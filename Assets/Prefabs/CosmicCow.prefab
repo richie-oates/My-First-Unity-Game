@@ -138,10 +138,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 463335933372323002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b525978225100bf2adcc24461d176a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 37e3b226b5a756fd5a97acae9b6d49e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 1
+  explosionOffset: {x: 0, y: 1, z: 0.5}
   explosionParticles: {fileID: 7303472089845130122, guid: 6cbc21f5e9162483993a2b84b14d5ac8,
     type: 3}
+  explosionSound: {fileID: 8300000, guid: 2a921313c927f45238a0b8baabe3ab12, type: 3}
   pointsValue: 1000
-  explosionSound: {fileID: 8300000, guid: eb8998f3b3d3a49db96a634bf39ed153, type: 3}
+  currentHealth: 0

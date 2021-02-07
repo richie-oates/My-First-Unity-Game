@@ -16,7 +16,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"/home/richard/UnityGames/WebGL Builds/CosmicCow_v0.4;/home/richard/UnityGames/WebGL Builds/CosmicCow_v0.3;;;;;;;;\"}"
+                "value": "{\"m_Value\":\"/home/richard/UnityGames/WebGL Builds/SpaceCow_v0.5;/home/richard/UnityGames/WebGL Builds/CosmicCow_v0.4;/home/richard/UnityGames/WebGL Builds/CosmicCow_v0.3;;;;;;;\"}"
             }
         ]
     }

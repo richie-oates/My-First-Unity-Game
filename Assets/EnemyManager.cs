@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -21,16 +23,25 @@ public class EnemyManager : MonoBehaviour
     public GameObject enemyCowPrefab;
     // Array to count the number of enemy cows on the screen
     public GameObject[] enemyCowsArray;
+    [SerializeField] GameObject bullet;
     
     private bool cowSpawning = false;
     private bool enemyWaveSpawning = false;
     
-    public int timeBetweenWaves = 2;
-    
+    public int timeBetweenWaves = 3;
+    [SerializeField] float timeBetweenShotsMin = 0.3f;
+    [SerializeField] float timeBetweenShotsMax = 1.0f;
+    private bool shooting = false;
+    int enemyLevel;
+
+    public TextMeshProUGUI newWaveText;
+    public TextMeshProUGUI spawnCountdownText;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+       enemyLevel = 1; 
     }
 
     private void FixedUpdate() {
@@ -53,6 +64,12 @@ public class EnemyManager : MonoBehaviour
             StartCoroutine(SpawnEnemies());
             enemyWaveSpawning = true;
         }
+
+        if (!enemyWaveSpawning && !shooting && enemyObjectsArray.Length > 0)
+        {
+            StartCoroutine(RandomShooting());
+            shooting = true;
+        }
         
         // Check if there are any instances of the enemyCow still alive
         // If not, start a timer then spawn a new one
@@ -64,6 +81,23 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    IEnumerator RandomShooting()
+    {
+        // Random time between shots
+        float timeBetweenShots = Random.Range(timeBetweenShotsMin, timeBetweenShotsMax);
+        // Wait before shooting
+        yield return new WaitForSeconds(timeBetweenShots);
+        // Check if therew are still enemies on screen
+        if (enemyObjectsArray.Length > 0) {
+            // Get random enemy
+            GameObject enemyShooter = RandomEnemyGenerator();
+            if (enemyShooter != null) {
+            // Shoot bullet instantiate at enemy postion
+            ShootBullet(enemyShooter.transform.position);
+        }
+        }
+        shooting = false;
+    }
     IEnumerator SpawnCowRoutine()
     {
         yield return new WaitForSeconds(5);
@@ -84,7 +118,7 @@ public class EnemyManager : MonoBehaviour
             horizontalDirection = -1;
         }
         // Move all enemies horizontally
-        transform.Translate(Vector3.right * horizontalDirection * speed * Time.deltaTime);
+        transform.Translate(Vector3.right * horizontalDirection * speed * enemyLevel * Time.deltaTime);
     }
 
     // Move down a set amount
@@ -100,18 +134,33 @@ public class EnemyManager : MonoBehaviour
     // a maximum of the number of enemy prefabs in the array
     IEnumerator SpawnEnemies()
     {
-        for (int i = 0; i < timeBetweenWaves; i++)
-        {
-            // need to setup canvas to display countdown timer
-            int timer = timeBetweenWaves;
-            yield return new WaitForSeconds(1);
-            timer = timer - 1;
-        }
-        int enemyRows = enemyWave;
+
         if (enemyWave > enemyPrefabs.Length)
         {
-            enemyRows = enemyPrefabs.Length;
+            enemyWave = 1;
+            enemyLevel++;
         }
+
+        newWaveText.SetText("Level " + enemyLevel + "\nWave " + enemyWave);
+        newWaveText.gameObject.SetActive(true);
+        
+        int timer = timeBetweenWaves;
+        
+        yield return new WaitForSeconds(1);
+
+        spawnCountdownText.gameObject.SetActive(true);
+        for (int i = 0; i < timeBetweenWaves; i++)
+        {
+            spawnCountdownText.SetText("Enemies inbound ... " + timer);       
+            yield return new WaitForSeconds(1);
+            
+            timer = timer - 1;
+        }
+
+        spawnCountdownText.gameObject.SetActive(false);
+        newWaveText.gameObject.SetActive(false);
+        int enemyRows = enemyWave;
+
         for (int j = 0; j < enemyRows; j++)
         {
             for (int i = 0; i < enemiesInRow; i++)
@@ -131,5 +180,34 @@ public class EnemyManager : MonoBehaviour
     public void SpawnCow()
     {
         Instantiate(enemyCowPrefab);
+    }
+
+    void ShootBullet(Vector3 position)
+    {
+        // creates an instance of the bullet
+        
+        // GameObject newBullet = Instantiate(bullet, position, bullet.transform.rotation);
+        // bullet.tag = gameObject.tag;
+        // bullet.GetComponent<BulletController>().bulletDirection = Vector3.down;
+
+        GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
+        if (pooledProjectile != null)
+        {
+            pooledProjectile.GetComponent<BulletController>().bulletDirection = Vector3.down;
+            // Set the tag to Enemy so it doesn't interact with other enemies
+            pooledProjectile.tag = "Enemy";
+            // Set deactivate to true so it doesn't get destroyed out of bounds, just deactivated
+            pooledProjectile.GetComponent<DestroyOutOfBounds>().deactivate = true;
+            Debug.Log("projectileTag: " + pooledProjectile.tag + " shooterTag: " + gameObject.tag);
+            pooledProjectile.transform.position = position; // position it at the passed parameter position
+            pooledProjectile.SetActive(true); // activate it
+        }
+    }
+
+    GameObject RandomEnemyGenerator()
+    {
+        int enemyNumber = Random.Range(0, enemyObjectsArray.Length-1);
+        GameObject enemy = enemyObjectsArray[enemyNumber];
+        return enemy;
     }
 }

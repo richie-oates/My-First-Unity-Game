@@ -14,10 +14,10 @@ GameObject:
   - component: {fileID: 5515831448105416495}
   - component: {fileID: 5784335863952478992}
   - component: {fileID: 5544738231005034990}
-  - component: {fileID: 3445517226364596895}
-  m_Layer: 7
+  - component: {fileID: -6237594921248690222}
+  m_Layer: 0
   m_Name: Bullet
-  m_TagString: Bullet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,6 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 25
+  bulletStrength: 1
+  bulletDirection: {x: 0, y: -1, z: 0}
 --- !u!65 &5784335863952478992
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -106,11 +108,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4813256766262262777}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9007266, y: 3.780982, z: 1.7533349}
-  m_Center: {x: 0.020471066, y: -0.010236203, z: -0.008188546}
+  m_Size: {x: 1.2015333, y: 2.155357, z: 1.0471492}
+  m_Center: {x: 0.0029910728, y: 0.015982164, z: -0.0046925545}
 --- !u!54 &5544738231005034990
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -127,7 +129,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 118
   m_CollisionDetection: 0
---- !u!114 &3445517226364596895
+--- !u!114 &-6237594921248690222
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,8 +138,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4813256766262262777}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b525978225100bf2adcc24461d176a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 230e009fe1a6ba1b3badc7785af20f55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionParticles: {fileID: 0}
-  pointsValue: 0
+  zLimitUpper: 18
+  zLimitLower: -12
+  xLimitUpper: 15
+  xLimitLower: -15
+  deactivate: 0
