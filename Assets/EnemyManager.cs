@@ -19,13 +19,13 @@ public class EnemyManager : MonoBehaviour
     public GameObject[] enemyPrefabs;
     // GameObject array of the instances of enemy objects on the screen
     public GameObject[] enemyObjectsArray;
-    // EnemyCow prefab from unity
-    public GameObject enemyCowPrefab;
-    // Array to count the number of enemy cows on the screen
-    public GameObject[] enemyCowsArray;
+    // // EnemyCow prefab from unity
+    // public GameObject enemyCowPrefab;
+    // // Array to count the number of enemy cows on the screen
+    // public GameObject[] enemyCowsArray;
     [SerializeField] GameObject bullet;
     
-    private bool cowSpawning = false;
+    // private bool cowSpawning = false;
     private bool enemyWaveSpawning = false;
     
     public int timeBetweenWaves = 3;
@@ -73,12 +73,12 @@ public class EnemyManager : MonoBehaviour
         
         // Check if there are any instances of the enemyCow still alive
         // If not, start a timer then spawn a new one
-        enemyCowsArray = GameObject.FindGameObjectsWithTag("SpaceCow");
-        if (enemyCowsArray.Length == 0 && cowSpawning == false)
-        {
-            StartCoroutine(SpawnCowRoutine());
-            cowSpawning = true;
-        }
+        // enemyCowsArray = GameObject.FindGameObjectsWithTag("SpaceCow");
+        // if (enemyCowsArray.Length == 0 && cowSpawning == false)
+        // {
+        //     StartCoroutine(SpawnCowRoutine());
+        //     cowSpawning = true;
+        // }
     }
 
     IEnumerator RandomShooting()
@@ -90,7 +90,7 @@ public class EnemyManager : MonoBehaviour
         // Check if therew are still enemies on screen
         if (enemyObjectsArray.Length > 0) {
             // Get random enemy
-            GameObject enemyShooter = RandomEnemyGenerator();
+            GameObject enemyShooter = RandomEnemyGenerator(enemyObjectsArray);
             if (enemyShooter != null) {
             // Shoot bullet instantiate at enemy postion
             ShootBullet(enemyShooter.transform.position);
@@ -98,12 +98,12 @@ public class EnemyManager : MonoBehaviour
         }
         shooting = false;
     }
-    IEnumerator SpawnCowRoutine()
-    {
-        yield return new WaitForSeconds(5);
-        SpawnCow();
-        cowSpawning = false;
-    }
+    // IEnumerator SpawnCowRoutine()
+    // {
+    //     yield return new WaitForSeconds(5);
+    //     SpawnCow();
+    //     cowSpawning = false;
+    // }
 
     // Change the direction of movement of the enemies and bring them closer to the player
     // This method is triggered in the IndividualEnemy script when any enemy reaches a horizontal limit
@@ -135,7 +135,7 @@ public class EnemyManager : MonoBehaviour
     IEnumerator SpawnEnemies()
     {
 
-        if (enemyWave > enemyPrefabs.Length)
+        if (enemyWave > 5)
         {
             enemyWave = 1;
             enemyLevel++;
@@ -165,9 +165,13 @@ public class EnemyManager : MonoBehaviour
         {
             for (int i = 0; i < enemiesInRow; i++)
             {
-                Vector3 newPos = new Vector3(-7.5f + i * 2.5f, 0.8f, 11 + j * 2);
-                GameObject newEnemy = Instantiate(enemyPrefabs[j], newPos, Quaternion.identity);
+                Vector3 newPos = new Vector3(-7.5f + i * 2.5f, 0.8f, 11 + j *4);
+                GameObject newEnemy = RandomEnemyGenerator(enemyPrefabs);
+                if (newEnemy != null) 
+                {
+                newEnemy = Instantiate(newEnemy, newPos, Quaternion.identity);
                 newEnemy.transform.parent = transform;
+                }
             }
             
         }
@@ -176,11 +180,11 @@ public class EnemyManager : MonoBehaviour
         enemyWaveSpawning = false;
     }
 
-    // Spawns an enemyCow moving across the top of the screen
-    public void SpawnCow()
-    {
-        Instantiate(enemyCowPrefab);
-    }
+    // // Spawns an enemyCow moving across the top of the screen
+    // public void SpawnCow()
+    // {
+    //     Instantiate(enemyCowPrefab);
+    // }
 
     void ShootBullet(Vector3 position)
     {
@@ -204,10 +208,16 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    GameObject RandomEnemyGenerator()
+    GameObject RandomEnemyGenerator(GameObject[] enemiesArray)
     {
-        int enemyNumber = Random.Range(0, enemyObjectsArray.Length-1);
-        GameObject enemy = enemyObjectsArray[enemyNumber];
+        
+        // while (enemy = null)
+        // {
+            int enemyNumber = Random.Range(0, enemiesArray.Length);
+            GameObject enemy = enemiesArray[enemyNumber];
+        // }
+        Debug.Log("EnemyPrefabnumber: " + enemyNumber);
         return enemy;
+        
     }
 }
