@@ -5,8 +5,9 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     public float speed = 25;
-    public int bulletStrength = 1;
+    public int damageStrength = 1;
     public Vector3 bulletDirection;
+    public List<string> destroysObjectsWithTag;
 
     // FixedUpdate is called once per frame
     void FixedUpdate()
@@ -15,10 +16,13 @@ public class BulletController : MonoBehaviour
     }
     
     void OnTriggerEnter(Collider other) {
-        if (other.gameObject.tag != gameObject.tag)
+        foreach (string tag in destroysObjectsWithTag)
         {
-            other.gameObject.SendMessageUpwards("ApplyDamage", bulletStrength, SendMessageOptions.DontRequireReceiver);
-            gameObject.SetActive(false);
+            if (other.gameObject.tag == tag)
+            {
+                other.gameObject.SendMessageUpwards("ApplyDamage", damageStrength, SendMessageOptions.DontRequireReceiver);
+                gameObject.SetActive(false);
+            }
         }
     }
 }

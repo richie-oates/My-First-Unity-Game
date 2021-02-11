@@ -846,7 +846,6 @@ GameObject:
   m_Component:
   - component: {fileID: 446197551}
   - component: {fileID: 446197552}
-  - component: {fileID: 446197553}
   m_Layer: 0
   m_Name: EnemyManager
   m_TagString: Untagged
@@ -888,6 +887,7 @@ MonoBehaviour:
   horizontalLimit: 11
   enemiesInRow: 6
   enemyWave: 1
+  damageStrength: 1
   enemyPrefabs:
   - {fileID: 4985372300940728884, guid: cc32c44df7e3100eba355b00a82a178b, type: 3}
   - {fileID: 1694633314377960488, guid: 172eb24ee846544929a1e932880929a7, type: 3}
@@ -898,29 +898,17 @@ MonoBehaviour:
   - {fileID: 5425027949283032042, guid: 15798cdb67325883bad63407f30cdf30, type: 3}
   - {fileID: 6097712540495292378, guid: 04617d91192553c47b70ece1eee1b4f1, type: 3}
   - {fileID: 3978651527875416794, guid: f82fbe7aa1ae085a991bfb83bd715743, type: 3}
+  - {fileID: 4830844401824655504, guid: 3dc27ad6b50983119933a2d59ef70c03, type: 3}
+  - {fileID: 8014093363801207868, guid: 9a2593bdd1e235166a79aa8dab64c59d, type: 3}
   enemyObjectsArray: []
-  bullet: {fileID: 4813256766262262777, guid: 1fff5295350d9892087a8c6fe1d81adc, type: 3}
+  bulletTag: Enemy Bullet
   timeBetweenWaves: 3
   timeBetweenShotsMin: 1
   timeBetweenShotsMax: 3
+  shootingDirection: {x: 0, y: 0, z: -1}
   newWaveText: {fileID: 2130719759}
   spawnCountdownText: {fileID: 1257651930}
---- !u!114 &446197553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 446197550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5308c96c9060c5192a00a0d7da9d9d34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pooledObjects: []
-  objectToPool: {fileID: 4813256766262262777, guid: 1fff5295350d9892087a8c6fe1d81adc,
-    type: 3}
-  amountToPool: 2
+  gameManager: {fileID: 0}
 --- !u!1 &472887801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1401,6 +1389,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1473,6 +1462,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 25.886, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 8e88f57ae6a6c5eb291829b245eaf99c, type: 2}
+  isGlobal: 0
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1 &1257651928
 GameObject:
   m_ObjectHideFlags: 0
@@ -2114,6 +2120,28 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6709023430508187178}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2076870263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076870262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5308c96c9060c5192a00a0d7da9d9d34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  itemsToPool:
+  - objectToPool: {fileID: 4813256766262262777, guid: 1fff5295350d9892087a8c6fe1d81adc,
+      type: 3}
+    amountToPool: 10
+    shouldExpand: 0
+  - objectToPool: {fileID: 3540823867415838673, guid: bb8765af52f7c2a60ada1ded12617daf,
+      type: 3}
+    amountToPool: 10
+    shouldExpand: 0
 --- !u!1 &2096234487
 GameObject:
   m_ObjectHideFlags: 0
@@ -2427,6 +2455,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 517665182, guid: b2d1c22499b95db83a58db0f6b8191ca, type: 3}
+      propertyPath: objectToPool
+      value: 
+      objectReference: {fileID: 3540823867415838673, guid: bb8765af52f7c2a60ada1ded12617daf,
+        type: 3}
     - target: {fileID: 7389787224418671298, guid: b2d1c22499b95db83a58db0f6b8191ca,
         type: 3}
       propertyPath: m_RootOrder
@@ -2484,6 +2517,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7389787224418671299, guid: b2d1c22499b95db83a58db0f6b8191ca,
         type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389787224418671299, guid: b2d1c22499b95db83a58db0f6b8191ca,
+        type: 3}
+      propertyPath: bulletTag
+      value: Player Bullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389787224418671299, guid: b2d1c22499b95db83a58db0f6b8191ca,
+        type: 3}
+      propertyPath: stopSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389787224418671299, guid: b2d1c22499b95db83a58db0f6b8191ca,
+        type: 3}
       propertyPath: gameManagerObject
       value: 
       objectReference: {fileID: 2076870262}
@@ -2497,5 +2545,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7503498071482317358, guid: b2d1c22499b95db83a58db0f6b8191ca,
+        type: 3}
+      propertyPath: currentHealth
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 517665182, guid: b2d1c22499b95db83a58db0f6b8191ca, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b2d1c22499b95db83a58db0f6b8191ca, type: 3}

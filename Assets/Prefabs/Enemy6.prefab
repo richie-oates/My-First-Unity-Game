@@ -180,8 +180,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.2215413, y: 1, z: 1}
+  m_Center: {x: -0.030210197, y: 0, z: 0}
 --- !u!114 &6345597777793251128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   explosionOffset: {x: 0, y: 1, z: 0.5}
-  explosionParticles: {fileID: 2478549635105912040, guid: ec46c8c4a3cbc429382ee48bd9169b45,
+  explosionParticles: {fileID: 3199346384015752365, guid: 307229a5540374aae98859caad2128a3,
     type: 3}
   explosionSound: {fileID: 8300000, guid: 2a921313c927f45238a0b8baabe3ab12, type: 3}
   pointsValue: 100

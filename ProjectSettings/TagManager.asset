@@ -8,6 +8,8 @@ TagManager:
   - SpaceCow
   - Enemy
   - Friendly
+  - Player Bullet
+  - Enemy Bullet
   layers:
   - Default
   - TransparentFX

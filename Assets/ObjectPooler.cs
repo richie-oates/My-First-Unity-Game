@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class ObjectPoolItem
+{
+    public GameObject objectToPool;
+    public int amountToPool;
+    public bool shouldExpand;
+}
+
 public class ObjectPooler : MonoBehaviour
 {
     public static ObjectPooler SharedInstance;
     public List<GameObject> pooledObjects;
-    public GameObject objectToPool;
-    public int amountToPool;
+    public List<ObjectPoolItem> itemsToPool;
 
     void Awake()
     {
@@ -19,27 +26,39 @@ public class ObjectPooler : MonoBehaviour
     {
         // Loop through list of pooled objects,deactivating them and adding them to the list 
         pooledObjects = new List<GameObject>();
-        for (int i = 0; i < amountToPool; i++)
+        foreach (ObjectPoolItem item in itemsToPool)
         {
-            GameObject obj = (GameObject)Instantiate(objectToPool);
-            obj.SetActive(false);
-            pooledObjects.Add(obj);
-            // obj.transform.SetParent(this.transform); // set as children of Spawn Manager
+            for (int i = 0; i < item.amountToPool; i++)
+            {
+                GameObject obj = (GameObject)Instantiate(item.objectToPool);
+                obj.SetActive(false);
+                pooledObjects.Add(obj);
+            }
         }
     }
-
-    public GameObject GetPooledObject()
+    
+    public GameObject GetPooledObject(string tag)
     {
-        // For as many objects as are in the pooledObjects list
         for (int i = 0; i < pooledObjects.Count; i++)
         {
-            // if the pooled objects is NOT active, return that object 
-            if (!pooledObjects[i].activeInHierarchy)
+            if (!pooledObjects[i].activeInHierarchy && pooledObjects[i].tag == tag)
             {
                 return pooledObjects[i];
             }
         }
-        // otherwise, return null   
+        foreach (ObjectPoolItem item in itemsToPool)
+        {
+            if (item.objectToPool.tag == tag)
+            {
+                if (item.shouldExpand)
+                {
+                    GameObject obj = (GameObject)Instantiate(item.objectToPool);
+                    obj.SetActive(false);
+                    pooledObjects.Add(obj);
+                    return obj;
+                }
+            }
+        }
         return null;
     }
 

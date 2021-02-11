@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     public int hiScore;
     public TextMeshProUGUI gameOverText;
     public Button restartButton;
-    private bool gameActive;
+    public static bool gameActive;
+    [SerializeField] EnemyManager enemyManager;
     
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // if (!gameActive && Input.GetKeyDown(KeyCode.Enter))
+        // {
+        //     RestartGame();
+        // }
     }
 
     private void FixedUpdate() 
@@ -59,7 +63,10 @@ public class GameManager : MonoBehaviour
     {
         gameActive = false;
         gameOverText.gameObject.SetActive(true);
-        restartButton.gameObject.SetActive(true);
+        // restartButton.gameObject.SetActive(true);
+        enemyManager.spawnCountdownText.gameObject.SetActive(false);
+        enemyManager.newWaveText.gameObject.SetActive(false);
+
     }
 
     public void RestartGame()

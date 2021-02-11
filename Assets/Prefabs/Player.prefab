@@ -119,7 +119,7 @@ MonoBehaviour:
   maxRotation: 60
   smooth: 2.5
   stopSpeed: 0.1
-  bullet: {fileID: 4813256766262262777, guid: 1fff5295350d9892087a8c6fe1d81adc, type: 3}
+  bulletTag: Player Bullet
   explosionParticles: {fileID: 2478549635105912040, guid: ec46c8c4a3cbc429382ee48bd9169b45,
     type: 3}
   gameManagerObject: {fileID: 0}
@@ -172,9 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pooledObjects: []
-  objectToPool: {fileID: 4813256766262262777, guid: 1fff5295350d9892087a8c6fe1d81adc,
-    type: 3}
-  amountToPool: 10
+  itemsToPool: []
 --- !u!64 &4065796053010283218
 MeshCollider:
   m_ObjectHideFlags: 0

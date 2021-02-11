@@ -14,16 +14,14 @@ public class EnemyManager : MonoBehaviour
     public float horizontalLimit = 11;
     public int enemiesInRow = 6;
     public int enemyWave = 1;
+    public int damageStrength = 1;
     
     // GameObject array of enemy prefabs which are inserted with unity
     public GameObject[] enemyPrefabs;
     // GameObject array of the instances of enemy objects on the screen
     public GameObject[] enemyObjectsArray;
-    // // EnemyCow prefab from unity
-    // public GameObject enemyCowPrefab;
-    // // Array to count the number of enemy cows on the screen
-    // public GameObject[] enemyCowsArray;
-    [SerializeField] GameObject bullet;
+    
+    [SerializeField] string bulletTag;
     
     // private bool cowSpawning = false;
     private bool enemyWaveSpawning = false;
@@ -31,11 +29,13 @@ public class EnemyManager : MonoBehaviour
     public int timeBetweenWaves = 3;
     [SerializeField] float timeBetweenShotsMin = 0.3f;
     [SerializeField] float timeBetweenShotsMax = 1.0f;
+    [SerializeField] Vector3 shootingDirection;
     private bool shooting = false;
     int enemyLevel;
 
     public TextMeshProUGUI newWaveText;
     public TextMeshProUGUI spawnCountdownText;
+    [SerializeField] GameManager gameManager;
 
 
     // Start is called before the first frame update
@@ -134,7 +134,7 @@ public class EnemyManager : MonoBehaviour
     // a maximum of the number of enemy prefabs in the array
     IEnumerator SpawnEnemies()
     {
-
+        bool gameActive = GameManager.gameActive;
         if (enemyWave > 5)
         {
             enemyWave = 1;
@@ -142,15 +142,21 @@ public class EnemyManager : MonoBehaviour
         }
 
         newWaveText.SetText("Level " + enemyLevel + "\nWave " + enemyWave);
+        if (gameActive)
+        {
         newWaveText.gameObject.SetActive(true);
-        
+        }
         int timer = timeBetweenWaves;
         
         yield return new WaitForSeconds(1);
 
-        spawnCountdownText.gameObject.SetActive(true);
+        if (gameActive)
+        {
+            spawnCountdownText.gameObject.SetActive(true);
+        }
         for (int i = 0; i < timeBetweenWaves; i++)
         {
+
             spawnCountdownText.SetText("Enemies inbound ... " + timer);       
             yield return new WaitForSeconds(1);
             
@@ -194,12 +200,12 @@ public class EnemyManager : MonoBehaviour
         // bullet.tag = gameObject.tag;
         // bullet.GetComponent<BulletController>().bulletDirection = Vector3.down;
 
-        GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
+        GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject(bulletTag);
         if (pooledProjectile != null)
         {
-            pooledProjectile.GetComponent<BulletController>().bulletDirection = Vector3.down;
+            pooledProjectile.GetComponent<BulletController>().bulletDirection = shootingDirection;
             // Set the tag to Enemy so it doesn't interact with other enemies
-            pooledProjectile.tag = "Enemy";
+            pooledProjectile.tag = bulletTag;
             // Set deactivate to true so it doesn't get destroyed out of bounds, just deactivated
             pooledProjectile.GetComponent<DestroyOutOfBounds>().deactivate = true;
             Debug.Log("projectileTag: " + pooledProjectile.tag + " shooterTag: " + gameObject.tag);
@@ -218,6 +224,14 @@ public class EnemyManager : MonoBehaviour
         // }
         Debug.Log("EnemyPrefabnumber: " + enemyNumber);
         return enemy;
+        
+    }
+    private void OnCollisionEnter(Collision other) {
+        if (other.gameObject.tag == "Player")
+        {
+            gameManager.GameOver();
+            other.gameObject.SendMessageUpwards("ApplyDamage", damageStrength, SendMessageOptions.DontRequireReceiver);
+        }
         
     }
 }

@@ -10,8 +10,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float maxRotation = 60;
     [SerializeField] float smooth = 2.5f;
     [SerializeField] float stopSpeed = 0.1f;
+    [SerializeField] float startSpeed = 0.4f;
 
-    [SerializeField] GameObject bullet;
+    [SerializeField] string bulletTag;
     [SerializeField] ParticleSystem explosionParticles;
     [SerializeField] GameObject gameManagerObject;
     [SerializeField] Vector3 shootingDirection;
@@ -43,10 +44,23 @@ public class PlayerController : MonoBehaviour
     void MovePlayer()
     {
         horizontalInput = Input.GetAxis("Horizontal");
+
         // Makes for a quicker stop but also a slower start when moving
         if (Mathf.Abs(horizontalInput) < stopSpeed)
         {
             horizontalInput = 0;
+        }
+
+        // Makes for a quicker start
+        if (horizontalInput > startSpeed)
+        {
+            horizontalInput = 1;
+        }
+
+        // Makes for a quicker start
+        if (horizontalInput < -startSpeed)
+        {
+            horizontalInput = -1;
         }
 
         transform.Translate(Vector3.right * playerSpeed * horizontalInput * Time.deltaTime, Space.World);
@@ -75,26 +89,15 @@ public class PlayerController : MonoBehaviour
 
     void ShootBullet() 
     {
-        // creates an instance of the bullet
-        // Instantiate(bullet, transform.position + new Vector3(0, 0, 1.5f), bullet.transform.rotation);
-        // BulletController bulletController = bullet.GetComponent<BulletController>();
-        // bulletController.direction = Vector3.up;
-        // bullet.layer = 9;
-
-        // Todo: This now links the rotation of bullet to the player so it turns when the player does,
-        // that's not what we want!!
-        // Get an object from the pool
-        GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
+        GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject(bulletTag);
         if (pooledProjectile != null)
         {
             pooledProjectile.GetComponent<BulletController>().bulletDirection = shootingDirection;
-            pooledProjectile.tag = gameObject.tag;
+            pooledProjectile.tag = bulletTag;
             pooledProjectile.GetComponent<DestroyOutOfBounds>().deactivate = true;
             Debug.Log("projectileTag: " + pooledProjectile.tag + " shooterTag: " + gameObject.tag);
             pooledProjectile.transform.position = transform.position + new Vector3(0, 0, 1.5f); // position it at player
             pooledProjectile.SetActive(true); // activate it
-            // Tried this to correct rotation but didn't work
-            // pooledProjectile.transform.rotation = Quaternion.Euler(0, 0, 0);
             pooledProjectile.transform.position = transform.position + new Vector3(0, 0, 1.5f); // position it at player
         }
     }

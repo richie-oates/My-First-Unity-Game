@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1076937544564419323}
   - component: {fileID: 8193547022370111207}
   m_Layer: 0
-  m_Name: Explosion_Grey
+  m_Name: Explosion_Blue_Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4786,7 +4786,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 11
   m_RenderMode: 4
   m_SortMode: 0
   m_MinParticleSize: 0
