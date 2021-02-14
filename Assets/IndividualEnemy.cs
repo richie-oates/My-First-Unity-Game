@@ -9,11 +9,14 @@ public class IndividualEnemy : MonoBehaviour
     EnemyManager enemyManager;
     public int pointsValue;
     public float zLimit = -8.0f;
+    public int damageStrength = 1;
+    [SerializeField] private GameObject gameManagerObject;
 
 
     // Awake is called when the gameobject is created
     void Awake()
     {
+        GameObject gameManager = GameObject.Find("GameManager");
         GameObject enemyManagerObject = GameObject.Find("EnemyManager");
         enemyManager = enemyManagerObject.GetComponent<EnemyManager>();
         xLimit = enemyManager.horizontalLimit;
@@ -28,13 +31,25 @@ public class IndividualEnemy : MonoBehaviour
         {
             enemyManager.moveRight = false;
             enemyManager.moveDown = true;            
-        } else if (transform.position.x < -xLimit)
+        }
+        if (transform.position.x < -xLimit)
         {
             enemyManager.moveRight = true;
             enemyManager.moveDown = true;
         }
 
              
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            other.gameObject.SendMessageUpwards("ApplyDamage", damageStrength, SendMessageOptions.DontRequireReceiver);
+
+            gameManagerObject.GetComponent<GameManager>().GameOver();
+        }
+
     }
 
     // void OnCollisionEnter(Collision other)

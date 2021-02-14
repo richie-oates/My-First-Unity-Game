@@ -198,6 +198,8 @@ MonoBehaviour:
   enemyManagerObject: {fileID: 0}
   pointsValue: 10
   zLimit: 0
+  damageStrength: 1
+  gameManagerObject: {fileID: 0}
 --- !u!54 &4543328583840337737
 Rigidbody:
   m_ObjectHideFlags: 0

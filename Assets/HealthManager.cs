@@ -22,7 +22,7 @@ public class HealthManager : MonoBehaviour
     void Awake()
     {
         currentHealth = maxHealth;
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
     }
 

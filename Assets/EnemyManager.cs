@@ -14,7 +14,7 @@ public class EnemyManager : MonoBehaviour
     public float horizontalLimit = 11;
     public int enemiesInRow = 6;
     public int enemyWave = 1;
-    public int damageStrength = 1;
+    
     
     // GameObject array of enemy prefabs which are inserted with unity
     public GameObject[] enemyPrefabs;
@@ -84,7 +84,7 @@ public class EnemyManager : MonoBehaviour
     IEnumerator RandomShooting()
     {
         // Random time between shots
-        float timeBetweenShots = Random.Range(timeBetweenShotsMin, timeBetweenShotsMax);
+        float timeBetweenShots = Random.Range(timeBetweenShotsMin, timeBetweenShotsMax) / enemyLevel;
         // Wait before shooting
         yield return new WaitForSeconds(timeBetweenShots);
         // Check if therew are still enemies on screen
@@ -118,7 +118,7 @@ public class EnemyManager : MonoBehaviour
             horizontalDirection = -1;
         }
         // Move all enemies horizontally
-        transform.Translate(Vector3.right * horizontalDirection * speed * enemyLevel * Time.deltaTime);
+        transform.Translate(Vector3.right * horizontalDirection * speed * enemyLevel * 2/3 * Time.deltaTime);
     }
 
     // Move down a set amount
@@ -226,12 +226,5 @@ public class EnemyManager : MonoBehaviour
         return enemy;
         
     }
-    private void OnCollisionEnter(Collision other) {
-        if (other.gameObject.tag == "Player")
-        {
-            gameManager.GameOver();
-            other.gameObject.SendMessageUpwards("ApplyDamage", damageStrength, SendMessageOptions.DontRequireReceiver);
-        }
-        
-    }
+    
 }

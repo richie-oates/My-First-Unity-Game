@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6709023431745865820
+--- !u!1 &5292237139674791989
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6709023431745865810}
-  - component: {fileID: 6709023431745865821}
+  - component: {fileID: 5292237139674791988}
+  - component: {fileID: 5292237139674791979}
   m_Layer: 0
-  m_Name: Game Manager
-  m_TagString: GameController
+  m_Name: EnemyManager
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6709023431745865810
+--- !u!4 &5292237139674791988
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6709023431745865820}
+  m_GameObject: {fileID: 5292237139674791989}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -3.04}
+  m_LocalPosition: {x: -0.3, y: 0, z: -7.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6709023431745865821
+--- !u!114 &5292237139674791979
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6709023431745865820}
+  m_GameObject: {fileID: 5292237139674791989}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7502ba75153004666a3e75497899d290, type: 3}
+  m_Script: {fileID: 11500000, guid: 37e4ad55b66a06ff9a4913905ae6bb6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  speed: 5
   horizontalDirection: 1
-  forwardMovement: 0.1
+  verticalMovementAmount: 0.5
+  moveRight: 1
+  moveDown: 0
   horizontalLimit: 11
+  enemiesInRow: 6
+  enemyWave: 1
   enemyPrefabs:
   - {fileID: 4985372300940728884, guid: cc32c44df7e3100eba355b00a82a178b, type: 3}
   - {fileID: 1694633314377960488, guid: 172eb24ee846544929a1e932880929a7, type: 3}
@@ -54,12 +58,17 @@ MonoBehaviour:
   - {fileID: 3862955033676797532, guid: 625101915892f5bd984ae7c25ed8aac1, type: 3}
   - {fileID: 3069987283523748213, guid: 1809429978a13e780a4ae430c4587288, type: 3}
   - {fileID: 6345597777793251135, guid: 70ae5f8cf57650c6d9d542b0f3754e98, type: 3}
+  - {fileID: 5425027949283032042, guid: 15798cdb67325883bad63407f30cdf30, type: 3}
+  - {fileID: 6097712540495292378, guid: 04617d91192553c47b70ece1eee1b4f1, type: 3}
+  - {fileID: 3978651527875416794, guid: f82fbe7aa1ae085a991bfb83bd715743, type: 3}
+  - {fileID: 4830844401824655504, guid: 3dc27ad6b50983119933a2d59ef70c03, type: 3}
+  - {fileID: 8014093363801207868, guid: 9a2593bdd1e235166a79aa8dab64c59d, type: 3}
   enemyObjectsArray: []
-  enemyCowPrefab: {fileID: 463335933372323002, guid: 2874b846259b5b4cf8a4998e3a557e1d, type: 3}
-  enemyCowsArray: []
-  enemiesInRow: 8
-  enemyWave: 1
-  scoreText: {fileID: 0}
-  score: 0
-  hiScoreText: {fileID: 0}
-  hiScore: 0
+  bulletTag: Enemy Bullet
+  timeBetweenWaves: 3
+  timeBetweenShotsMin: 1
+  timeBetweenShotsMax: 3
+  shootingDirection: {x: 0, y: 0, z: -1}
+  newWaveText: {fileID: 0}
+  spawnCountdownText: {fileID: 0}
+  gameManager: {fileID: 0}

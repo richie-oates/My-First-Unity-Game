@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-       public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI scoreText;
     public int score;
     public TextMeshProUGUI hiScoreText;
     public int hiScore;
@@ -28,10 +28,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if (!gameActive && Input.GetKeyDown(KeyCode.Enter))
-        // {
-        //     RestartGame();
-        // }
+        if (!gameActive && Input.GetKeyDown(KeyCode.Return))
+        {
+            RestartGame();
+        }
     }
 
     private void FixedUpdate() 
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     {
         gameActive = false;
         gameOverText.gameObject.SetActive(true);
-        // restartButton.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
         enemyManager.spawnCountdownText.gameObject.SetActive(false);
         enemyManager.newWaveText.gameObject.SetActive(false);
 
