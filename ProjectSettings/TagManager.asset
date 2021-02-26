@@ -10,6 +10,7 @@ TagManager:
   - Friendly
   - Player Bullet
   - Enemy Bullet
+  - Powerup
   layers:
   - Default
   - TransparentFX

@@ -28,7 +28,6 @@ GameObject:
   - component: {fileID: 7389787224418671299}
   - component: {fileID: 7389787224418671296}
   - component: {fileID: 7503498071482317358}
-  - component: {fileID: 517665182}
   - component: {fileID: 4065796053010283218}
   m_Layer: 9
   m_Name: Player
@@ -119,11 +118,10 @@ MonoBehaviour:
   maxRotation: 60
   smooth: 2.5
   stopSpeed: 0.1
+  startSpeed: 0.4
   bulletTag: Player Bullet
-  explosionParticles: {fileID: 2478549635105912040, guid: ec46c8c4a3cbc429382ee48bd9169b45,
-    type: 3}
-  gameManagerObject: {fileID: 0}
-  shootingDirection: {x: 0, y: 0, z: 0}
+  shootingDirection: {x: 0, y: 1, z: 0}
+  bulletReloadTime: 0.15
 --- !u!54 &7389787224418671296
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -152,27 +150,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37e3b226b5a756fd5a97acae9b6d49e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 5
   explosionOffset: {x: 0, y: 1, z: 0.5}
   explosionParticles: {fileID: 2088871590894813759, guid: 745208c9d6e104225bd99e1ab894e3bb,
     type: 3}
   explosionSound: {fileID: 8300000, guid: 2a921313c927f45238a0b8baabe3ab12, type: 3}
   pointsValue: 0
-  currentHealth: 0
---- !u!114 &517665182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7389787224418671310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5308c96c9060c5192a00a0d7da9d9d34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pooledObjects: []
-  itemsToPool: []
+  currentHealth: 1
+  currentShieldLevel: 1
+  maxShieldLevel: 5
+  shieldIndicator: {fileID: 0}
+  healthIndicator: {fileID: 0}
 --- !u!64 &4065796053010283218
 MeshCollider:
   m_ObjectHideFlags: 0

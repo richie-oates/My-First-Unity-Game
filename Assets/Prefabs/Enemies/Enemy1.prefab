@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 4118585377331822061}
   - component: {fileID: -6374106772816037278}
   - component: {fileID: 1553713201105060399}
+  - component: {fileID: -1929892615200383907}
   m_Layer: 10
   m_Name: Enemy1
   m_TagString: Enemy
@@ -195,11 +196,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xLimit: 10
-  enemyManagerObject: {fileID: 0}
+  enemyManagerObject: {fileID: 5292237139674791989, guid: d913ff5de6c457dbb9ef57853f41b742,
+    type: 3}
   pointsValue: 10
-  zLimit: 0
   damageStrength: 1
-  gameManagerObject: {fileID: 0}
+  gameManagerObject: {fileID: 6709023431745865820, guid: 0a8513325217289f0ad12f4eb8f6ffc3,
+    type: 3}
 --- !u!54 &4118585377331822061
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -235,6 +237,10 @@ MonoBehaviour:
   explosionSound: {fileID: 8300000, guid: 2a921313c927f45238a0b8baabe3ab12, type: 3}
   pointsValue: 100
   currentHealth: 0
+  currentShieldLevel: 0
+  maxShieldLevel: 0
+  shieldIndicator: {fileID: 0}
+  healthIndicator: {fileID: 0}
 --- !u!114 &1553713201105060399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,3 +258,25 @@ MonoBehaviour:
   xLimitUpper: 15
   xLimitLower: -15
   deactivate: 0
+--- !u!114 &-1929892615200383907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4985372300940728884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22e6aa94874b8e446947bd011d9e1145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 0.1
+  jigPosition: 0
+  positionJigAmount: {x: 0.5, y: 0.2, z: 1.2}
+  positionFrequency: 10
+  jigRotation: 1
+  rotationJigAmount: {x: 0, y: 10, z: 30}
+  rotationFrequency: 10
+  jigScale: 0
+  scaleJigAmount: {x: 1, y: 0, z: 1}
+  scaleFrequency: 10.3

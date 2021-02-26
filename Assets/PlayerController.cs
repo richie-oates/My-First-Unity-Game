@@ -1,7 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*  -Controls and constrains the player movement to the x axis across the bottom of the screen
+    -Rotates the player ship about the z axis as it moves to simulate banking in the ship
+    -Shoots bullets taken from the object pooler
+*/
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float playerSpeed = 30;
@@ -11,18 +16,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float smooth = 2.5f;
     [SerializeField] float stopSpeed = 0.1f;
     [SerializeField] float startSpeed = 0.4f;
-
     [SerializeField] string bulletTag;
-    [SerializeField] ParticleSystem explosionParticles;
-    [SerializeField] GameObject gameManagerObject;
     [SerializeField] Vector3 shootingDirection;
-    private GameManager gameManager;
-    Collider playerCollider;
+    public float bulletReloadTime = 0.3f;
+    private bool bulletLoaded = true;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = gameManagerObject.GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -34,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update() 
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && bulletLoaded)
         {
             ShootBullet();
         }
@@ -89,16 +91,23 @@ public class PlayerController : MonoBehaviour
 
     void ShootBullet() 
     {
+        bulletLoaded = false;
         GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject(bulletTag);
         if (pooledProjectile != null)
         {
             pooledProjectile.GetComponent<BulletController>().bulletDirection = shootingDirection;
             pooledProjectile.tag = bulletTag;
             pooledProjectile.GetComponent<DestroyOutOfBounds>().deactivate = true;
-            Debug.Log("projectileTag: " + pooledProjectile.tag + " shooterTag: " + gameObject.tag);
             pooledProjectile.transform.position = transform.position + new Vector3(0, 0, 1.5f); // position it at player
             pooledProjectile.SetActive(true); // activate it
             pooledProjectile.transform.position = transform.position + new Vector3(0, 0, 1.5f); // position it at player
         }
+        StartCoroutine(ReloadBullet());
+    }
+
+    IEnumerator ReloadBullet()
+    {
+        yield return new WaitForSeconds(bulletReloadTime);
+        bulletLoaded = true;
     }
 }

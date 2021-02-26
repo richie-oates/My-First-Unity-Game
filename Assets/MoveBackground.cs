@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MoveBackground : MonoBehaviour
 {
-    public GameObject background;
     public float moveSpeed;
     public float zLimit;
     float zStart;

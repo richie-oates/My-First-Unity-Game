@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     public TextMeshProUGUI scoreText;
     public int score;
@@ -28,10 +28,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!gameActive && Input.GetKeyDown(KeyCode.Return))
-        {
-            RestartGame();
-        }
+        
     }
 
     private void FixedUpdate() 
@@ -52,8 +49,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         // Saves highscore
         PlayerPrefs.SetInt ("highscore", hiScore);
         PlayerPrefs.Save();
